@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1514277257 source:c:\users\user\desktop\things that involve stuff\c++\all sfml bullshit (most of it)\one day challenge\main.cpp
+	<iostream>
+	<SFML/Graphics.hpp>
+	<vector>
+	<cstdio>
+	<windows.h>
+
