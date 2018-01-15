@@ -1,17 +1,17 @@
-#include<iostream>
-#include<SFML/Graphics.hpp>
-#include<vector>
-#include<cstdio>
-#include<windows.h>
+#include <iostream>
+#include <SFML/Graphics.hpp>
+#include <SFML/System/Clock.hpp>
+#include <vector>
+#include <cstdio>
 using namespace std;
 using namespace sf;
 
 const int SizeX=1280;
 const int SizeY=1024;
-const int birdSize=25;
+const int birdSize=70;
 int ticks=1,secs=0;
 int LastX,LastY;
-RenderWindow window(VideoMode(SizeX,SizeY),"",Style::Fullscreen);
+RenderWindow window(VideoMode(SizeX,SizeY),"",Style::Close);
 RenderTexture screen;
 
 enum ScreenType{INGAME,MAIN,PREGAME,SETTINGS,AFTERGAME} currentScreen=MAIN;
@@ -100,6 +100,7 @@ int main()
     srand(time(0));
     StartGame(1);
     bool Update = true;
+	sf::Clock timer;
     while (window.isOpen())
     {
         int ShownX,ShownY;
@@ -241,7 +242,9 @@ int main()
 
         LastX=Mouse::getPosition().x;
         LastY=Mouse::getPosition().y;
-        Sleep(33);
+        //Sleep(33);
+		timer.restart();
+		while (timer.getElapsedTime().asMilliseconds() <= 33) {}
         if (currentScreen == INGAME)
         {
             ticks++;
@@ -254,7 +257,7 @@ int main()
             else if (secs<=120) del=3;
             else if (secs<=180) del=2;
             else del=1;
-            if (ticks%del==0) GenerateObject(rand()%7+8,rand()%41+80);
+            if (ticks%del==0) GenerateObject(rand()%7+8,rand()%41+20);
 
             cout<<objects.size()<<endl;
             for (int i=0;i<objects.size();i++)
